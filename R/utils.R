@@ -374,7 +374,7 @@ reloadConstr <- function(par, constr, obj){
 }
 
 bfactor2mod <- function(model, J){
-    tmp <- tempfile('tempfile')
+    tmp <- tempfile(pattern=paste(Sys.getpid()))
     unique <- sort(unique(model))
     index <- seq_len(J)
     tmp2 <- c()
@@ -944,21 +944,21 @@ buildModelSyntax <- function(model, J, groupNames, itemtype){
         oldmodel <- model
         model <- as.integer(model$x[model$x[,1L] == 'NEXPLORE', 2L])
         if(model != 1L) exploratory <- TRUE
-        tmp <- tempfile('tempfile')
+        tmp <- tempfile(pattern=paste(Sys.getpid()))
         for(i in 1L:model)
             cat(paste('F', i,' = 1-', (J-i+1L), "\n", sep=''), file=tmp, append = TRUE)
         model <- mirt.model(file=tmp, quiet = TRUE)
         model$x <- rbind(model$x, oldmodel$x[oldmodel$x[,1L] != 'NEXPLORE'])
     } else if((is(model, 'numeric') && length(model) == 1L)){
         if(any(itemtype == 'lca')){
-            tmp <- tempfile('tempfile')
+            tmp <- tempfile(pattern=paste(Sys.getpid()))
             for(i in 1L:model)
                 cat(paste('F', i,' = 1-', J, "\n", sep=''), file=tmp, append = TRUE)
             model <- mirt.model(file=tmp, quiet = TRUE)
             unlink(tmp)
         } else {
             if(model != 1L) exploratory <- TRUE
-            tmp <- tempfile('tempfile')
+            tmp <- tempfile(pattern=paste(Sys.getpid()))
             for(i in 1L:model)
                 cat(paste('F', i,' = 1-', (J-i+1L), "\n", sep=''), file=tmp, append = TRUE)
             model <- mirt.model(file=tmp, quiet = TRUE)
