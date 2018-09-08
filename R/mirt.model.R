@@ -341,7 +341,7 @@ mirt.model <- function(input = NULL, itemnames = NULL, file = "", COV = NULL, qu
                     minput[[1L]] <- minput[[1L]][-j]
                 }
             }
-            file <- tempfile(pattern=paste("file", Sys.getpid()), sep="")
+            file <- tempfile(pattern=paste("file", Sys.getpid(), sep=""))
             write.table(minput, file=file, row.names=FALSE, col.names=FALSE, quote=FALSE)
         }
         mod <- scan(file = file, what = list(type = "", pars = ""),
