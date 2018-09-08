@@ -388,7 +388,7 @@ bfactor2mod <- function(model, J){
     }
     cat(tmp2, file=tmp)
     model <- mirt.model(file=tmp, quiet = TRUE)
-    unlink(tmp)
+    # unlink(tmp)
     return(model)
 }
 
@@ -955,14 +955,14 @@ buildModelSyntax <- function(model, J, groupNames, itemtype){
             for(i in 1L:model)
                 cat(paste('F', i,' = 1-', J, "\n", sep=''), file=tmp, append = TRUE)
             model <- mirt.model(file=tmp, quiet = TRUE)
-            unlink(tmp)
+            # unlink(tmp)
         } else {
             if(model != 1L) exploratory <- TRUE
             tmp <- tempfile(pattern=paste(Sys.getpid()))
             for(i in 1L:model)
                 cat(paste('F', i,' = 1-', (J-i+1L), "\n", sep=''), file=tmp, append = TRUE)
             model <- mirt.model(file=tmp, quiet = TRUE)
-            unlink(tmp)
+            # unlink(tmp)
         }
     }
     if(is(model, 'numeric') && length(model) > 1L)
