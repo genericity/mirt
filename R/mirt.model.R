@@ -341,7 +341,7 @@ mirt.model <- function(input = NULL, itemnames = NULL, file = "", COV = NULL, qu
                     minput[[1L]] <- minput[[1L]][-j]
                 }
             }
-            tmp_dir = tempdir(check = TRUE)
+            tmp_dir = tempdir()
             if (!dir.exists(tmp_dir)){
                 dir.create(tmp_dir)
             }
